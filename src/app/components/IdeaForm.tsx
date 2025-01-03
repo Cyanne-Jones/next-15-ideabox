@@ -1,9 +1,22 @@
+'use client'
+
+import { useState } from "react";
+
 export const IdeaForm = () => {
-  const cats = 'meow'
+  const [text, setText] = useState('');
+
+  const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setText(event.target.value)
+  }
+
+  const saveIdea = () => {
+    console.log('save!')
+  }
 
   return (
     <div>
-      {cats}
+      <input type='text' value={text} onChange={handleTextInput}></input>
+      <button onClick={saveIdea}>Save Idea</button>
     </div>
-  )
-}
+  );
+};
