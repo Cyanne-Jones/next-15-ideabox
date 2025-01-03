@@ -1,17 +1,31 @@
 'use client'
 
 import { useState } from "react";
+import type { Card } from "@/utils";
 
-export const IdeaForm = () => {
+type Props = {
+  saveCard: (card: Card) => void
+};
+
+export const IdeaForm = ({
+  saveCard
+}: Props) => {
   const [text, setText] = useState('');
 
   const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
       setText(event.target.value)
-  }
+  };
 
   const saveIdea = () => {
-    console.log('save!')
-  }
+    const idea = {
+      text,
+      id: Date.now()
+    };
+
+    saveCard(idea);
+
+    setText('');
+  };
 
   return (
     <div>
