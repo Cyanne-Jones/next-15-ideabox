@@ -2,13 +2,38 @@
 import { useState } from "react";
 import { IdeaForm } from "./components/IdeaForm";
 import { IdeaCard } from "./components/IdeaCard";
-import type { Card } from "@/utils";
+import { Card, findCard } from "@/utils";
 
 export default function Home() {
-  const [cards, setCards] = useState<Card[]>([]);
+  const [cards, setCards] = useState<Card[] | []>([]);
 
   const saveCard = (newCard: Card) => {
     setCards([...cards, newCard])
+  };
+
+  const favoriteCard = (id: number) => {
+    const newArray = [...cards];
+    const target = findCard(id, newArray);
+
+    if(target) {
+      target.isFavorite = !target.isFavorite;
+    };
+
+    setCards(newArray);
+
+  };
+
+  
+
+  const deleteCard = (id: number) => {
+    const newArray = [...cards];
+    const target = findCard(id, newArray);
+
+    if(target) {
+      const index = newArray.findIndex(card => card.id === target.id)
+      newArray.splice(index, 1);
+      setCards(newArray);
+    };
   };
   
   return (
@@ -17,7 +42,7 @@ export default function Home() {
         <h1 className='m-1 text-xl text-bold'>Ideabox!</h1>
       <IdeaForm saveCard={saveCard}/>
 
-      {cards.length ? cards.map((card: Card) => <IdeaCard key={card.id} card={card} />) : <></>}
+      {cards.length ? cards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>) : <></>}
 
     </div>
   );
