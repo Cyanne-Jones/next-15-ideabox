@@ -1,18 +1,21 @@
 'use client'
 
-import { useState } from "react";
 import { Card } from "@/utils";
 
-export const IdeaCard = ({card} : {card: Card}) => {
-  const [ isFavorite, setFavorite ] = useState(false)
-
-  const handleFavoriteClick = () => {
-    setFavorite(!isFavorite)
-  }
+export const IdeaCard = ({
+  card, 
+  favoriteCard, 
+  deleteCard} 
+  : {
+    card: Card
+    favoriteCard: (id: number) => void
+    deleteCard: (id: number) => void
+  }) => {
 
   return (
     <div>
-      <button onClick={handleFavoriteClick}>{isFavorite ? '★' : '☆'}</button>
+      <button onClick={() => favoriteCard(card.id)}>{card.isFavorite ? '★' : '☆'}</button>
+      <button onClick={() => deleteCard(card.id)}>X</button>
       {card.text}
     </div>
   );
