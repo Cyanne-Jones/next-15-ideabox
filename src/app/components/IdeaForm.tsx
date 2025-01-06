@@ -19,7 +19,8 @@ export const IdeaForm = ({
   const saveIdea = () => {
     const idea = {
       text,
-      id: Date.now()
+      id: Date.now(),
+      isFavorite: false,
     };
 
     saveCard(idea);
