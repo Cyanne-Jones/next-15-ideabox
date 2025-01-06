@@ -38,13 +38,14 @@ export default function Home() {
   
   return (
     <div 
-      className="p-6 m-auto bg-pink-800 rounded-xl flex flex-col items-center justify-center"
+      className="p-6 m-auto bg-pink-800 max-w-lg rounded-xl flex flex-col items-center justify-center"
     >
       <h1 className='m-1 text-xl text-bold'>Ideabox!</h1>
       <IdeaForm saveCard={saveCard}/>
 
-      {cards.length ? cards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>) : <></>}
-
+      <div className='flex max-w-lg flex-wrap items-center justify-center'>
+        {cards.length ? cards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>) : <></>}
+      </div>
     </div>
   );
 }
