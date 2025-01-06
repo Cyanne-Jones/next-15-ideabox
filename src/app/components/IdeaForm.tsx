@@ -28,9 +28,22 @@ export const IdeaForm = ({
   };
 
   return (
-    <div>
-      <input type='text' value={text} onChange={handleTextInput}></input>
-      <button onClick={saveIdea}>Save Idea</button>
+    <div className='w-72 h-600 p-6 bg-pink-400 rounded-xl '>
+      <div className='w-full h-32 flex flex-col items-center justify-center'>
+        <input 
+        className='my-2 p-2 rounded-xl hover:bg-pink-200'
+        type='text' 
+        value={text} 
+        onChange={handleTextInput} 
+        placeholder='Your Idea Here!'
+      />
+      <button 
+        className ='my-2 rounded-xl p-2 bg-purple-300 text-purple-900 cursor-pointer hover:bg-pink-300 ' 
+        onClick={saveIdea}
+        >
+          Save Idea
+        </button>
+        </div>
     </div>
   );
 };
