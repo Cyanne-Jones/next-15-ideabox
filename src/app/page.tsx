@@ -1,13 +1,26 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IdeaForm } from "./components/IdeaForm";
 import { IdeaCard } from "./components/IdeaCard";
 import { Card, findCard } from "@/utils";
 
 export default function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
+  const [ displayCards, setDisplayCards ] = useState<Card[]>([]);
+  const [ isFilteredByFavorites, setIsFilteredByFavorites ] = useState<boolean>(false);
 
   let localStorageCards;
+
+  useEffect(() => {
+
+    if(isFilteredByFavorites) {
+      setDisplayCards(cards.filter(card => card.isFavorite))
+      return
+    }
+
+    setDisplayCards(cards)
+
+  }, [cards, isFilteredByFavorites])
   
 
 
@@ -59,6 +72,10 @@ export default function Home() {
       setCards(newArray);
     };
   };
+
+  const filterFavorites = () => {
+    setIsFilteredByFavorites(!isFilteredByFavorites);
+  };
   
   return (
     <div 
@@ -67,9 +84,16 @@ export default function Home() {
       <h1 className='m-1 text-xl text-bold'>Ideabox!</h1>
       <IdeaForm saveCard={saveCard}/>
 
+      {cards.length > 0 && <button 
+        onClick={filterFavorites}
+        className = {`h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg ${isFilteredByFavorites ? 'bg-pink-300 text-pink-700 hover:bg-purple-300' : 'bg-purple-300 text-purple-700 hover:bg-pink-300'}`}
+      >
+        {isFilteredByFavorites ? 'Show All Ideas' : 'Filter By Favorites'} 
+      </button>}
+
       <div className='flex max-w-lg flex-wrap items-center justify-center'>
-        {cards.length ? cards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>) : <></>}
-      </div>
+         {displayCards.length > 0 && displayCards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>)}
+       </div>
     </div>
   );
-}
+};
