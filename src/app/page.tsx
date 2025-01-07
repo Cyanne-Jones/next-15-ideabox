@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 import { IdeaForm } from "./components/IdeaForm";
 import { IdeaCard } from "./components/IdeaCard";
 import { Card, findCard } from "@/utils";
+import Link from "next/link";
 
 export default function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
   const [ displayCards, setDisplayCards ] = useState<Card[]>([]);
   const [ isFilteredByFavorites, setIsFilteredByFavorites ] = useState<boolean>(false);
-
-  let localStorageCards;
 
   useEffect(() => {
 
@@ -21,6 +20,20 @@ export default function Home() {
     setDisplayCards(cards)
 
   }, [cards, isFilteredByFavorites])
+
+  useEffect(() => {
+
+    try {
+      if (typeof window !== undefined) {
+        const localStorageCards = localStorage.getItem('cards')
+        const parsedCards = localStorageCards ? JSON.parse(localStorageCards) : []
+        setCards(parsedCards)
+      }
+    } catch(e) {
+      console.error('error setting local storage', e)
+    }
+
+  }, [])
   
 
 
@@ -90,6 +103,8 @@ export default function Home() {
       >
         {isFilteredByFavorites ? 'Show All Ideas' : 'Filter By Favorites'} 
       </button>}
+
+      <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300'>Go To /favorites</Link>
 
       <div className='flex max-w-lg flex-wrap items-center justify-center'>
          {displayCards.length > 0 && displayCards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>)}
