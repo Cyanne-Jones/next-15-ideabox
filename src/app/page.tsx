@@ -13,38 +13,34 @@ export default function Home() {
   useEffect(() => {
 
     if(isFilteredByFavorites) {
-      setDisplayCards(cards.filter(card => card.isFavorite))
-      return
-    }
+      setDisplayCards(cards.filter(card => card.isFavorite));
+      return;
+    };
 
-    setDisplayCards(cards)
+    setDisplayCards(cards);
 
-  }, [cards, isFilteredByFavorites])
+  }, [cards, isFilteredByFavorites]);
 
   useEffect(() => {
 
     try {
       if (typeof window !== undefined) {
-        const localStorageCards = localStorage.getItem('cards')
-        const parsedCards = localStorageCards ? JSON.parse(localStorageCards) : []
-        setCards(parsedCards)
-      }
+        const localStorageCards = localStorage.getItem('cards');
+        const parsedCards = localStorageCards ? JSON.parse(localStorageCards) : [];
+        setCards(parsedCards);
+      };
     } catch(e) {
-      console.error('error setting local storage', e)
-    }
+      console.error('error setting local storage', e);
+    };
 
-  }, [])
+  }, []);
   
-
-
   const saveCard = (newCard: Card) => {
 
     const newArray = [...cards, newCard]
     setCards(newArray)
     if (typeof window !== undefined) {
-      console.log('setting cards to local storage!');
       localStorage.setItem('cards', JSON.stringify(newArray));
-      console.log('local storage cards', localStorage.getItem('cards'));
     }
   };
 
@@ -60,15 +56,11 @@ export default function Home() {
     const favorites = newArray.filter(card => card.isFavorite);
 
     if (typeof window !== undefined) {
-      console.log('setting favorites to local storage!');
-      localStorage.setItem('favorites', JSON.stringify(favorites))
-      console.log('local storage faves', localStorage.getItem('favorites'))
+      localStorage.setItem('favorites', JSON.stringify(favorites));
     }
     
 
   };
-
-  
 
   const deleteCard = (id: number) => {
     const newArray = [...cards];
@@ -78,9 +70,7 @@ export default function Home() {
       const index = newArray.findIndex(card => card.id === target.id)
       newArray.splice(index, 1);
       if (typeof window !== undefined) {
-        console.log('deleting item from local storage!');
         localStorage.setItem('cards', JSON.stringify(newArray));
-        console.log('local storage cards', localStorage.getItem('cards'));
       }
       setCards(newArray);
     };
