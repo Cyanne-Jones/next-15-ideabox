@@ -16,13 +16,14 @@ export default async function RequestPage() {
   return (
     <div className='flex flex-col items-center justify-center'>
       <h1>This is the request page!</h1>
-      <Link className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300' href='/'>Go Home!</Link>
-      <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300'>Go To /favorites</Link>
+      <Link className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700' href='/'>Go Home!</Link>
+      <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /favorites</Link>
       <Image
         src={data[0].url}
         alt='cat'
         height={data[0].height}
         width={data[0].width}
+        className='max-w-72 max-h-72 rounded-lg'
       />
     </div>
   );
