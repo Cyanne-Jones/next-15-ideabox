@@ -29,7 +29,7 @@ export const IdeaForm = ({
   };
 
   return (
-    <div className='w-72 h-600 p-6 bg-pink-400 rounded-xl '>
+    <div className='w-72 h-600 p-6 bg-pink-400 rounded-xl border-2 border-purple-600'>
       <div className='w-full h-32 flex flex-col items-center justify-center'>
         <input 
         className='my-2 p-2 rounded-xl hover:bg-pink-200 text-pink-800'
