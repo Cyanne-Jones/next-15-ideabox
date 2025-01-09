@@ -95,6 +95,7 @@ export default function Home() {
       </button>}
 
       <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300'>Go To /favorites</Link>
+      <Link href='/request' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300'>Go To /request</Link>
 
       <div className='flex max-w-lg flex-wrap items-center justify-center'>
          {displayCards.length > 0 && displayCards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>)}
