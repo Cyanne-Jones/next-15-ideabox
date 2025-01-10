@@ -25,6 +25,11 @@ export default async function RequestPage() {
         width={data[0].width}
         className='max-w-72 max-h-72 rounded-lg'
       />
+      <Link 
+        href='/request'
+      >
+        Give me another cat!
+      </Link>
     </div>
   );
 };
