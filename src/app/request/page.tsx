@@ -21,7 +21,7 @@ export default async function RequestPage() {
 
       if (e instanceof Error && e.message === 'Failed to fetch cat data') {
         const response = await fetch('https://api.thecatapi.com/v1/images/search', {
-          cache: 'no-store', // Disable caching for fresh data
+          cache: 'no-store'
         });
   
         if (!response.ok) {
