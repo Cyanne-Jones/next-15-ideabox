@@ -12,16 +12,16 @@ export default async function RequestPage() {
 
       if (!response.ok) {
         throw new Error('Failed to fetch cat data');
-      }
+      };
 
-      return await response.json()
+      return await response.json();
 
     } catch (e) {
-      console.error(e) 
+      console.error(e);
 
       // the catch value is technically an unknown, so before checking any data
       // you first need to check if its an instance of the Error object for type safety
-      
+
       if (e instanceof Error && e.message === 'Failed to fetch cat data') {
         const response = await fetch('https://api.thecatapi.com/v1/images/search', {
           cache: 'no-store'
@@ -29,17 +29,17 @@ export default async function RequestPage() {
   
         if (!response.ok) {
           console.error('Failed to re-fetch cat data');
-          return
-        }
+          return;
+        };
 
         return await response.json();
       }
       
-    }
-  }
+    };
+  };
 
-  const catPhoto = await getCatPhoto()
-  const {url, height, width} = catPhoto[0]
+  const catPhoto = await getCatPhoto();
+  const {url, height, width} = catPhoto[0];
 
   return (
     <div className='flex flex-col items-center justify-center'>
