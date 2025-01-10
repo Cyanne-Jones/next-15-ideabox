@@ -4,11 +4,14 @@ import { IdeaForm } from "./components/IdeaForm";
 import { IdeaCard } from "./components/IdeaCard";
 import { Card, findCard } from "@/utils";
 import Link from "next/link";
+import { ConfirmationDialog } from "./components/ConfirmationDialog";
+import { clear } from "console";
 
 export default function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
   const [ displayCards, setDisplayCards ] = useState<Card[]>([]);
   const [ isFilteredByFavorites, setIsFilteredByFavorites ] = useState<boolean>(false);
+  const [ isDialogOpen, setIsDialogOpen ] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -79,6 +82,15 @@ export default function Home() {
   const filterFavorites = () => {
     setIsFilteredByFavorites(!isFilteredByFavorites);
   };
+
+  const clearCards = () => {
+    if (typeof window !== undefined) {
+      localStorage.setItem('cards', '');
+      setCards([]);
+      setDisplayCards([]);
+      setIsDialogOpen(false);
+    }
+  }
   
   return (
     <div 
@@ -94,12 +106,20 @@ export default function Home() {
         {isFilteredByFavorites ? 'Show All Ideas' : 'Filter By Favorites'} 
       </button>}
 
+      {cards.length > 0 && <button 
+        onClick={() => setIsDialogOpen(true)}
+        className = 'h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'
+      >
+        Clear all cards
+      </button>}
+
       <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /favorites</Link>
       <Link href='/request' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /request</Link>
 
       <div className='flex max-w-lg flex-wrap items-center justify-center'>
          {displayCards.length > 0 && displayCards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>)}
        </div>
+       {isDialogOpen && <ConfirmationDialog setOpen={setIsDialogOpen} clearCards={clearCards} />}
     </div>
   );
 };
