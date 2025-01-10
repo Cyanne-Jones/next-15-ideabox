@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default async function RequestPage() {
 
-  const fetchKitty = async () => {
+  const getCatPhoto = async () => {
     try {
 
       const response = await fetch('https://api.thecatapi.com/v1/images/search', {
@@ -35,7 +35,8 @@ export default async function RequestPage() {
     }
   }
 
-  const data = await fetchKitty()
+  const catPhoto = await getCatPhoto()
+  const {url, height, width} = catPhoto[0]
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -43,10 +44,10 @@ export default async function RequestPage() {
       <Link className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700' href='/'>Go Home!</Link>
       <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /favorites</Link>
       <Image
-        src={data[0].url}
+        src={url}
         alt='cat'
-        height={data[0].height}
-        width={data[0].width}
+        height={height}
+        width={width}
         className='max-w-72 max-h-72 rounded-lg'
       />
       <Link 
