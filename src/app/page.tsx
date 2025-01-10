@@ -99,22 +99,24 @@ export default function Home() {
       <h1 className='m-1 text-xl text-bold'>Ideabox!</h1>
       <IdeaForm saveCard={saveCard}/>
 
+      <div className='flex items-center justify-center'>
       {cards.length > 0 && <button 
         onClick={filterFavorites}
-        className = {`h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg ${isFilteredByFavorites ? 'bg-pink-300 text-pink-700 hover:bg-purple-300' : 'bg-purple-300 text-purple-700 hover:bg-pink-300'}`}
+        className = {`min-h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg ${isFilteredByFavorites ? 'bg-pink-300 text-pink-700 hover:bg-purple-300' : 'bg-purple-300 text-purple-700 hover:bg-pink-300'}`}
       >
         {isFilteredByFavorites ? 'Show All Ideas' : 'Filter By Favorites'} 
       </button>}
 
       {cards.length > 0 && <button 
         onClick={() => setIsDialogOpen(true)}
-        className = 'h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'
+        className = 'min-h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'
       >
         Clear all cards
       </button>}
 
-      <Link href='/favorites' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /favorites</Link>
-      <Link href='/request' className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /request</Link>
+      <Link href='/favorites' className='min-h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /favorites</Link>
+      <Link href='/request' className='min-h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'>Go To /request</Link>
+      </div>
 
       <div className='flex max-w-lg flex-wrap items-center justify-center'>
          {displayCards.length > 0 && displayCards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>)}
