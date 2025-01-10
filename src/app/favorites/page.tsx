@@ -10,7 +10,6 @@ const Favorites = () => {
   if (typeof window !== undefined) {
     try {
     favorites = localStorage.getItem('favorites') || '';
-    const cards = localStorage.getItem('cards');
     } catch(e) {
       console.log(e)
     }
