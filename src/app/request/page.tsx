@@ -14,19 +14,28 @@ export default async function RequestPage() {
         throw new Error('Failed to fetch cat data');
       }
 
-      return response
+      return await response.json()
 
     } catch (e) {
       console.error(e) 
-      const response = await fetch('https://api.thecatapi.com/v1/images/search', {
-        cache: 'no-store', // Disable caching for fresh data
-      });
+
+      if (e instanceof Error && e.message === 'Failed to fetch cat data') {
+        const response = await fetch('https://api.thecatapi.com/v1/images/search', {
+          cache: 'no-store', // Disable caching for fresh data
+        });
+  
+        if (!response.ok) {
+          console.error('Failed to re-fetch cat data');
+          return
+        }
+
+        return await response.json();
+      }
       
-      return response;
     }
   }
 
-  const data = await (await fetchKitty()).json()
+  const data = await fetchKitty()
 
   return (
     <div className='flex flex-col items-center justify-center'>
