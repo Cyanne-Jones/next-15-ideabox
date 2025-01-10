@@ -26,6 +26,7 @@ export default async function RequestPage() {
         className='max-w-72 max-h-72 rounded-lg'
       />
       <Link 
+        className='h-8 min-w-1/2 m-4 p-1 cursor-pointer rounded-lg bg-purple-300 text-purple-700 hover:bg-pink-300 hover:shadow-md hover:shadow-pink-700'
         href='/request'
       >
         Give me another cat!
