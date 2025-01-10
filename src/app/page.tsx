@@ -5,7 +5,6 @@ import { IdeaCard } from "./components/IdeaCard";
 import { Card, findCard } from "@/utils";
 import Link from "next/link";
 import { ConfirmationDialog } from "./components/ConfirmationDialog";
-import { clear } from "console";
 
 export default function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
