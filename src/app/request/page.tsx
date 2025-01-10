@@ -3,15 +3,30 @@ import Link from "next/link";
 
 export default async function RequestPage() {
 
-  const response = await fetch('https://api.thecatapi.com/v1/images/search', {
-    cache: 'no-store', // Disable caching for fresh data
-  });
+  const fetchKitty = async () => {
+    try {
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch cat data');
+      const response = await fetch('https://api.thecatapi.com/v1/images/search', {
+        cache: 'no-store', // Disable caching for fresh data
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch cat data');
+      }
+
+      return response
+
+    } catch (e) {
+      console.error(e) 
+      const response = await fetch('https://api.thecatapi.com/v1/images/search', {
+        cache: 'no-store', // Disable caching for fresh data
+      });
+      
+      return response;
+    }
   }
 
-  const data = await response.json();
+  const data = await (await fetchKitty()).json()
 
   return (
     <div className='flex flex-col items-center justify-center'>
