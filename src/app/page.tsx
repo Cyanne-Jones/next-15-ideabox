@@ -5,13 +5,15 @@ import { IdeaCard } from "./components/IdeaCard";
 import { Card, findCard } from "@/utils";
 import Link from "next/link";
 import { ConfirmationDialog } from "./components/ConfirmationDialog";
-import { motion } from "motion/react"
+import { motion } from "motion/react";
+import JSConfetti from "js-confetti";
 
 export default function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
   const [ displayCards, setDisplayCards ] = useState<Card[]>([]);
   const [ isFilteredByFavorites, setIsFilteredByFavorites ] = useState<boolean>(false);
   const [ isDialogOpen, setIsDialogOpen ] = useState<boolean>(false);
+  const jsConfetti = new JSConfetti()
 
   useEffect(() => {
 
@@ -44,6 +46,11 @@ export default function Home() {
     setCards(newArray)
     if (typeof window !== undefined) {
       localStorage.setItem('cards', JSON.stringify(newArray));
+      jsConfetti.addConfetti({
+        confettiColors: [
+          '#f8bbd0', '#ba68c8', '#00bcd4'
+        ]
+      });
     }
   };
 
