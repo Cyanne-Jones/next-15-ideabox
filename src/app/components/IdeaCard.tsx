@@ -20,18 +20,20 @@ export const IdeaCard = ({
     animate={{ rotate: 360 }}
       className='min-h-32 w-32 bg-purple-400 rounded-lg m-2 p-2 border-2 border-purple-700'>
       <div className='flex justify-between'>
-        {favoriteCard && <button 
+        {favoriteCard && <motion.button
+          whileHover={{scale: 1.2}} 
           onClick={() => favoriteCard(card.id)}
           className={buttonStyle}
           >
           {card.isFavorite ? '★' : '☆'}
-        </button>}
-        {deleteCard && <button 
+        </motion.button>}
+        {deleteCard && <motion.button 
+          whileHover={{scale: 1.2}} 
           onClick={() => deleteCard(card.id)}
           className={buttonStyle}
           >
           X
-        </button>}
+        </motion.button>}
       </div>
       {card.text}
     </motion.div>
