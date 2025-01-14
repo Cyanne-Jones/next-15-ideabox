@@ -43,7 +43,7 @@ export const IdeaForm = ({
           initial={{scale: 0}}
           animate={{scale: 1}}
           transition={{ duration: 0.3, ease: "linear" }}
-          whileHover={{scale: 1.3, boxShadow: '0px 0px 5px 5px rgba(130,106,166,1)'}}
+          whileHover={{scale: 1.3, boxShadow: '0px 0px 5px 5px #ba68c8'}}
           className ='my-2 rounded-xl p-2 bg-purple-300 text-purple-900 cursor-pointer hover:bg-pink-300 ' 
           onClick={saveIdea}
         >
