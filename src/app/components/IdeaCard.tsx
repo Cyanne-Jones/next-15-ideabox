@@ -1,6 +1,7 @@
 'use client'
 
 import { Card } from "@/utils";
+import { motion } from "motion/react";
 
 export const IdeaCard = ({
   card, 
@@ -15,7 +16,9 @@ export const IdeaCard = ({
   const buttonStyle = 'min-h-8 min-w-8 rounded-lg bg-pink-200 text-purple-700 hover:bg-pink-500 hover:text-purple-900 flex items-center justify-center hover:shadow-md hover:shadow-pink-700'
 
   return (
-    <div className='min-h-32 w-32 bg-purple-400 rounded-lg m-2 p-2 border-2 border-purple-700'>
+    <motion.div 
+    animate={{ rotate: 360 }}
+      className='min-h-32 w-32 bg-purple-400 rounded-lg m-2 p-2 border-2 border-purple-700'>
       <div className='flex justify-between'>
         {favoriteCard && <button 
           onClick={() => favoriteCard(card.id)}
@@ -31,6 +34,6 @@ export const IdeaCard = ({
         </button>}
       </div>
       {card.text}
-    </div>
+    </motion.div>
   );
 };
