@@ -5,6 +5,7 @@ import { IdeaCard } from "./components/IdeaCard";
 import { Card, findCard } from "@/utils";
 import Link from "next/link";
 import { ConfirmationDialog } from "./components/ConfirmationDialog";
+import { motion } from "motion/react"
 
 export default function Home() {
   const [cards, setCards] = useState<Card[] | []>([]);
@@ -92,7 +93,9 @@ export default function Home() {
   }
   
   return (
-    <div 
+    <motion.div
+      initial={{ scale: 0 }} 
+      animate={{ scale: 1 }} 
       className="p-6 m-auto bg-pink-800 max-w-lg rounded-xl flex flex-col items-center justify-center"
     >
       <h1 className='m-1 text-xl text-bold'>Ideabox!</h1>
@@ -121,6 +124,6 @@ export default function Home() {
          {displayCards.length > 0 && displayCards.map((card: Card) => <IdeaCard key={card.id} card={card} favoriteCard={favoriteCard} deleteCard={deleteCard}/>)}
        </div>
        {isDialogOpen && <ConfirmationDialog setOpen={setIsDialogOpen} clearCards={clearCards} />}
-    </div>
+    </motion.div>
   );
 };
