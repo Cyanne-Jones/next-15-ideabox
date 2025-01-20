@@ -5,6 +5,7 @@
 - ✅ Use server components
 - ✅ Use suspense boundaries to handle loading state
 - ✅ Learn how Motion library works
+- ✅ Learn how to dockerize/containerize an app
 
 ## App should:
 - ✅ Allow user to create an "idea" composed of text string and time saved
@@ -13,3 +14,4 @@
 - ✅ Fetch data from external API, transform data in API layer, send transformed data to front end (GET)
 - ~Send data to api layer and do something with it depending no value ("POST" but not rly)~ No endpoint created due to app router usage (can pass POST request through the server component fetch call anyway)
 - ✅ Animate a few different interactions
+- ✅ Run when the Docker image is built and ran
